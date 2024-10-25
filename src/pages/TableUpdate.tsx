@@ -20,10 +20,10 @@ const TableUpdate = ({ record }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  const API = import.meta.env.VITE_API_URI;
   const updateUsers = async (id: number, values: any) => {
     try {
-      const res = await axios.put(`${process.env.API_URI}/users/update/${id}`, {
+      const res = await axios.put(API + `/users/update/${id}`, {
         name: values.name,
         surname: values.surname,
         email: values.email,

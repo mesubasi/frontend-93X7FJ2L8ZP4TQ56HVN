@@ -6,9 +6,11 @@ const TableAdd = () => {
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [form] = Form.useForm();
 
+  const API = import.meta.env.VITE_API_URI;
+
   const onFinish = async (values: any) => {
     try {
-      await axios.post(`http://localhost:3000/users/save`, {
+      await axios.post(API + `/users/save`, {
         name: values.name,
         surname: values.surname,
         email: values.email,
@@ -44,7 +46,7 @@ const TableAdd = () => {
           <Form.Item
             name="name"
             label="Name"
-            rules={[{ required: true, message: "Name field cannot be empty!" }]}
+            rules={[{ required: true, message: "Ad Boş Olamaz!" }]}
           >
             <Input />
           </Form.Item>
@@ -52,9 +54,7 @@ const TableAdd = () => {
           <Form.Item
             name="surname"
             label="Surname"
-            rules={[
-              { required: true, message: "Surname field cannot be empty!" },
-            ]}
+            rules={[{ required: true, message: "Soyad Boş Olamaz!" }]}
           >
             <Input />
           </Form.Item>
@@ -63,8 +63,8 @@ const TableAdd = () => {
             name="email"
             label="Email"
             rules={[
-              { required: true, message: "Email field cannot be empty!" },
-              { type: "email", message: "Please enter a valid email!" },
+              { required: true, message: "Email Boş Olamaz!" },
+              { type: "email", message: "Geçerli bir Email adresi girin!" },
             ]}
           >
             <Input />
@@ -73,9 +73,7 @@ const TableAdd = () => {
           <Form.Item
             name="password"
             label="Password"
-            rules={[
-              { required: true, message: "Password field cannot be empty!" },
-            ]}
+            rules={[{ required: true, message: "Parola boş olamaz!" }]}
           >
             <Input.Password />
           </Form.Item>
@@ -83,9 +81,7 @@ const TableAdd = () => {
           <Form.Item
             name="phone"
             label="Phone"
-            rules={[
-              { required: true, message: "Phone field cannot be empty!" },
-            ]}
+            rules={[{ required: true, message: "Telefon boş olamaz!" }]}
           >
             <Input />
           </Form.Item>
@@ -93,7 +89,7 @@ const TableAdd = () => {
           <Form.Item
             name="age"
             label="Age"
-            rules={[{ required: true, message: "Age field cannot be empty!" }]}
+            rules={[{ required: true, message: "Yaş boş olamaz!" }]}
           >
             <Input />
           </Form.Item>
@@ -101,9 +97,7 @@ const TableAdd = () => {
           <Form.Item
             name="country"
             label="Country"
-            rules={[
-              { required: true, message: "Country field cannot be empty!" },
-            ]}
+            rules={[{ required: true, message: "Ülke boş olamaz!" }]}
           >
             <Input />
           </Form.Item>
@@ -111,9 +105,7 @@ const TableAdd = () => {
           <Form.Item
             name="district"
             label="District"
-            rules={[
-              { required: true, message: "District field cannot be empty!" },
-            ]}
+            rules={[{ required: true, message: "Bölge boş olamaz!" }]}
           >
             <Input />
           </Form.Item>
@@ -121,7 +113,7 @@ const TableAdd = () => {
           <Form.Item
             name="role"
             label="Role"
-            rules={[{ required: true, message: "Role field cannot be empty!" }]}
+            rules={[{ required: true, message: "Rol boş olamaz!" }]}
           >
             <Input />
           </Form.Item>

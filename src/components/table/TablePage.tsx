@@ -2,9 +2,7 @@ import { Button, Input, Pagination, Space, Table, TableProps, Tag } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import TableAdd from "./TableAdd";
-import dotenv from "dotenv";
 import TableUpdate from "../../pages/TableUpdate";
-dotenv.config();
 
 interface DataType {
   key: string;
@@ -125,12 +123,12 @@ const TablePage = () => {
     },
   ];
 
-  const API = process.env.API_URI;
+  const API = import.meta.env.VITE_API_URI;
   const getUsers = async (page: number, search: string = "") => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `${API}/users?page=${page}&pageSize=${pageSize}&search=${search}`
+        API + `/users?page=${page}&pageSize=${pageSize}&search=${search}`
       );
 
       const data = res.data.data.map((user: any) => ({
