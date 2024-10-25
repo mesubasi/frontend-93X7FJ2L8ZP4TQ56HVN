@@ -6,7 +6,7 @@ const TableAdd = () => {
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [form] = Form.useForm();
 
-  const API = import.meta.env.VITE_API_URI;
+  const API = import.meta.env.VITE_API_URI || "http://localhost:3000";
 
   const onFinish = async (values: any) => {
     try {
@@ -37,7 +37,7 @@ const TableAdd = () => {
       </Button>
 
       <Modal
-        title="Add New User"
+        title="Yeni Kullanıcı Ekle"
         open={isModalAddOpen}
         onCancel={() => setIsModalAddOpen(false)}
         footer={null}

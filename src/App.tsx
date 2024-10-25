@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TablePage from "./components/table/TablePage";
+import TablePage from "./pages/TablePage";
 
 const App: React.FC = () => (
   <>

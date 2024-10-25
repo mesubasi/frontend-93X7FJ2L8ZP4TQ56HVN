@@ -1,8 +1,8 @@
 import { Button, Input, Pagination, Space, Table, TableProps, Tag } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import TableAdd from "./TableAdd";
-import TableUpdate from "../../pages/TableUpdate";
+import TableAdd from "../components/table/TableAdd";
+import TableUpdate from "../components/table/TableUpdate";
 
 interface DataType {
   key: string;
@@ -27,8 +27,8 @@ const TablePage = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<DataType | null>(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const columns: TableProps<DataType>["columns"] = [
     {
@@ -113,7 +113,7 @@ const TablePage = () => {
           <Button
             onClick={() => {
               setSelectedUser(record);
-              setIsModalVisible(true);
+              setIsUpdateModalOpen(true);
             }}
           >
             Güncelle
@@ -123,7 +123,7 @@ const TablePage = () => {
     },
   ];
 
-  const API = import.meta.env.VITE_API_URI;
+  const API = import.meta.env.VITE_API_URI || "http://localhost:3000";
   const getUsers = async (page: number, search: string = "") => {
     setLoading(true);
     try {
@@ -175,6 +175,10 @@ const TablePage = () => {
     getUsers(currentPage, searchTerm);
   }, [searchTerm, pageSize, currentPage]);
 
+  const updateSuccess = () => {
+    getUsers(currentPage, searchTerm);
+  };
+
   return (
     <div>
       <div className="flex justify-between pt-5 mx-10">
@@ -206,6 +210,25 @@ const TablePage = () => {
           showTotal={(total) => `Toplam ${total} kayıt`}
         />
       </div>
+      {selectedUser && (
+        <TableUpdate
+          userData={{
+            name: selectedUser.name,
+            surname: selectedUser.surname,
+            email: selectedUser.email,
+            password: selectedUser.password,
+            phone: selectedUser.phone,
+            age: selectedUser.age,
+            country: selectedUser.country,
+            district: selectedUser.district,
+            role: selectedUser.role,
+          }}
+          userId={selectedUser.key}
+          isModalOpen={isUpdateModalOpen}
+          setIsModalOpen={setIsUpdateModalOpen}
+          onUpdateSuccess={updateSuccess}
+        />
+      )}
     </div>
   );
 };
